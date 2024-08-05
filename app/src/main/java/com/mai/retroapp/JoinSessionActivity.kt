@@ -17,7 +17,7 @@ class JoinSessionActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityJoinSessionBinding
     private lateinit var database: DatabaseReference
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -31,8 +31,6 @@ class JoinSessionActivity : AppCompatActivity() {
         binding.buttonJoin.setOnClickListener {
             val sessionName = binding.editTextJoinSessionName.text.toString()
             val sessionPassword = binding.editTextJoinSessionPassword.text.toString()
-            val username = intent.getStringExtra("USERNAME")
-            val isAnonymous = intent.getBooleanExtra("IS_ANONYMOUS", false)
 
             if (sessionName.isEmpty() || sessionPassword.isEmpty()) {
                 if (sessionName.isEmpty()) {
@@ -42,7 +40,7 @@ class JoinSessionActivity : AppCompatActivity() {
                     binding.editTextJoinSessionPassword.error = "Session password is required"
                 }
                 return@setOnClickListener
-            }
+           }
 
             val sessionRef = database.child("sessions").child(sessionName)
             sessionRef.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -52,8 +50,7 @@ class JoinSessionActivity : AppCompatActivity() {
                         if (storedPassword == sessionPassword) {
                             val intent = Intent(this@JoinSessionActivity, MainActivity::class.java).apply {
                                 putExtra("SESSION_NAME", sessionName)
-                                putExtra("USERNAME", username)
-                                putExtra("IS_ANONYMOUS", isAnonymous)
+                                putExtra("SESSION_PASSWORD", sessionPassword)
                             }
                             startActivity(intent)
                         } else {
@@ -68,6 +65,11 @@ class JoinSessionActivity : AppCompatActivity() {
                     // Handle error
                 }
             })
+        }
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { view, insets ->
+            val imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
+            view.setPadding(0, 0, 0, imeInsets.bottom)
+            insets
         }
     }
 }
