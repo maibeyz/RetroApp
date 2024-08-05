@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/main"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".JoinSessionActivity">
+<TextView
+    android:id="@+id/textViewJoinSessionTitle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Join a Session"
+    android:textSize="24sp"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="40dp"/>
+
+<EditText
+    android:id="@+id/editTextJoinSessionName"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Enter session name"
+    android:layout_below="@id/textViewJoinSessionTitle"
+    android:layout_marginTop="20dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"/>
+
+<EditText
+    android:id="@+id/editTextJoinSessionPassword"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Enter session password"
+    android:layout_below="@id/editTextJoinSessionName"
+    android:layout_marginTop="10dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"/>
+
+<Button
+    android:id="@+id/buttonJoin"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Join Session"
+    android:layout_below="@id/editTextJoinSessionPassword"
+    android:layout_marginTop="20dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"/>
+
+</RelativeLayout>

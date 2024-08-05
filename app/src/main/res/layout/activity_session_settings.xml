@@ -1,47 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:id="@+id/main"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context=".SessionSettingsActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-<TextView
-    android:id="@+id/textViewTimer"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Set Timer (minutes):"
-    android:layout_marginTop="16dp"
-    android:layout_marginStart="16dp"
-    android:layout_alignParentStart="true"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".SessionSettingsActivity">
 
-<EditText
-    android:id="@+id/editTextTimer"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:inputType="number"
-    android:hint="3"
-    android:layout_toEndOf="@id/textViewTimer"
-    android:layout_marginStart="8dp"/>
+        <TextView
+            android:id="@+id/textViewSessionSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Session Settings"
+            android:textSize="24sp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"/>
 
-<CheckBox
-    android:id="@+id/checkBoxAnonymous"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Anonymous"
-    android:layout_below="@id/textViewTimer"
-    android:layout_marginTop="16dp"
-    android:layout_marginStart="16dp"/>
+        <EditText
+            android:id="@+id/editTextSessionName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Session Name"
+            android:layout_below="@id/textViewSessionSettings"
+            android:layout_marginTop="20dp"/>
 
-<Button
-    android:id="@+id/buttonSaveSettings"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Save Settings"
-    android:layout_below="@id/checkBoxAnonymous"
-    android:layout_marginTop="16dp"
-    android:layout_centerHorizontal="true"/>
+        <EditText
+            android:id="@+id/editTextPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:layout_below="@id/editTextSessionName"
+            android:layout_marginTop="20dp"/>
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/textViewTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set Timer (in minutes)"
+            android:layout_below="@id/editTextPassword"
+            android:layout_marginTop="20dp"/>
+
+        <EditText
+            android:id="@+id/editTextTimer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Timer"
+            android:layout_below="@id/textViewTimer"
+            android:layout_marginTop="10dp"/>
+
+        <Button
+            android:id="@+id/buttonStartSession"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start Session"
+            android:layout_below="@id/editTextTimer"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+</layout>

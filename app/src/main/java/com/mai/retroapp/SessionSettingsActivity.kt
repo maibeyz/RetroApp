@@ -20,16 +20,7 @@ class SessionSettingsActivity : AppCompatActivity() {
         binding = ActivitySessionSettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.buttonSaveSettings.setOnClickListener {
-            val timer = binding.editTextTimer.text.toString().toIntOrNull() ?: 3
-            val isAnonymous = binding.checkBoxAnonymous.isChecked
-            val intent = Intent(this, MainActivity::class.java).apply {
-                putExtra("TIMER", timer)
-                putExtra("IS_ANONYMOUS", isAnonymous)
-            }
-            startActivity(intent)
-            finish()
-        }
+
     }
 }
 
