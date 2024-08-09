@@ -1,5 +1,6 @@
 package com.mai.retroapp.data.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.database.DataSnapshot
@@ -7,11 +8,12 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.mai.retroapp.data.model.Card
 import com.mai.retroapp.data.model.Session
 
 class SessionRepository {
 
-    private val database: DatabaseReference = FirebaseDatabase.getInstance().getReference("sessions")
+    val database: DatabaseReference = FirebaseDatabase.getInstance().getReference("sessions")
 
     private val _sessions = MutableLiveData<List<Session>>()
     val sessions: LiveData<List<Session>> get() = _sessions
@@ -41,10 +43,43 @@ class SessionRepository {
         val sessionId = database.push().key ?: return
         session.id = sessionId
         database.child(sessionId).setValue(session)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Log.d("SessionRepository", "Session added successfully: $session")
+                } else {
+                    Log.e("SessionRepository", "Error adding session", task.exception)
+                }
+            }
     }
 
 
-    fun updateSession(session: Session) {
-        database.child(session.id).setValue(session)
+    fun addCardToSession(sessionId: String, card: Card) {
+        val cardId = database.child(sessionId).child("cards").push().key ?: return
+        card.id = cardId
+        database.child(sessionId).child("cards").child(cardId).setValue(card)
+    }
+
+
+    fun getSessionCards(sessionName: String): LiveData<List<Card>> {
+        val cardsLiveData = MutableLiveData<List<Card>>()
+        val cardsList = mutableListOf<Card>()
+
+
+        database.child(sessionName).child("cards").addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                cardsList.clear()
+                for (cardSnapshot in snapshot.children) {
+                    val card = cardSnapshot.getValue(Card::class.java)
+                    card?.let { cardsList.add(it) }
+                }
+                cardsLiveData.value = cardsList
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle error
+            }
+        })
+
+        return cardsLiveData
     }
 }

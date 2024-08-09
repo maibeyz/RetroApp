@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".JoinSessionActivity">
+    tools:context=".ui.viewmodel.JoinSessionActivity">
 
     <TextView
         android:id="@+id/textViewJoinSessionTitle"
@@ -15,6 +15,13 @@
         android:textSize="24sp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"/>
+    <EditText
+        android:id="@+id/editTextSessionName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter session name"
+        android:layout_centerInParent="true"
+        android:padding="16dp"/>
 
     <EditText
         android:id="@+id/editTextJoinSessionName"

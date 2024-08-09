@@ -1,12 +1,10 @@
-package com.mai.retroapp
+package com.mai.retroapp.ui.viewmodel
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -14,6 +12,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.mai.retroapp.R
 import com.mai.retroapp.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
@@ -48,16 +47,15 @@ class LoginActivity : AppCompatActivity() {
             auth.signInAnonymously()
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        val user = auth.currentUser
-                        updateUI(user)
+                        val intent = Intent(this, JoinAnonymus::class.java)
+                        startActivity(intent)
                     } else {
-                        Toast.makeText(baseContext, "Authentication failed.",
-                            Toast.LENGTH_SHORT).show()
-                        updateUI(null)
+                        Toast.makeText(baseContext, "Authentication failed.", Toast.LENGTH_SHORT).show()
                     }
                 }
         }
-    }
+        }
+
 
     companion object {
         private const val RC_SIGN_IN = 9001

@@ -1,4 +1,4 @@
-package com.mai.retroapp
+package com.mai.retroapp.ui.viewmodel
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,6 +11,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.mai.retroapp.R
 import com.mai.retroapp.databinding.ActivityJoinSessionBinding
 
 class JoinSessionActivity : AppCompatActivity() {
@@ -70,6 +71,15 @@ class JoinSessionActivity : AppCompatActivity() {
             val imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
             view.setPadding(0, 0, 0, imeInsets.bottom)
             insets
+        }
+        binding.buttonJoin.setOnClickListener {
+            val sessionName = binding.editTextSessionName.text.toString()
+            if (sessionName.isNotEmpty()) {
+                val intent = Intent(this, SessionActivity::class.java).apply {
+                    putExtra("SESSION_NAME", sessionName)
+                }
+                startActivity(intent)
+            }
         }
     }
 }
