@@ -1,53 +1,33 @@
 package com.mai.retroapp.ui.view
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.mai.retroapp.R
 import com.mai.retroapp.data.model.Session
-import com.mai.retroapp.databinding.ItemSessionBinding
-import java.util.Collections
 
-class SessionAdapter : RecyclerView.Adapter<SessionAdapter.SessionViewHolder>() {
+class SessionAdapter(private val sessions: List<Session>) : RecyclerView.Adapter<SessionAdapter.SessionViewHolder>() {
 
-    private var sessions = mutableListOf<Session>()
+    class SessionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val sessionName: TextView = itemView.findViewById(R.id.textViewSessionName)
 
-    fun submitList(sessionList: List<Session>) {
-        sessions = sessionList.toMutableList()
-        notifyDataSetChanged()
-    }
-
-    fun onItemMove(fromPosition: Int, toPosition: Int) {
-        Collections.swap(sessions, fromPosition, toPosition)
-        notifyItemMoved(fromPosition, toPosition)
+        fun bind(session: Session) {
+            sessionName.text = session.name // Session ismini göster
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SessionViewHolder {
-        val binding = ItemSessionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return SessionViewHolder(binding)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_session, parent, false)
+        return SessionViewHolder(view)
     }
-
-    override fun getItemCount(): Int = sessions.size
 
     override fun onBindViewHolder(holder: SessionViewHolder, position: Int) {
         holder.bind(sessions[position])
     }
 
-    class SessionViewHolder(private val binding: ItemSessionBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(session: Session) {
-            binding.session = session
-            binding.executePendingBindings()
-        }
-    }
-}
-
-class SessionDiffCallback : DiffUtil.ItemCallback<Session>() {
-    override fun areItemsTheSame(oldItem: Session, newItem: Session): Boolean {
-        return oldItem.id == newItem.id
-    }
-
-    override fun areContentsTheSame(oldItem: Session, newItem: Session): Boolean {
-        return oldItem == newItem
+    override fun getItemCount(): Int {
+        return sessions.size
     }
 }

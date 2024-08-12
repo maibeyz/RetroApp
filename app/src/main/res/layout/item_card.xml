@@ -2,13 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/textViewSessionName"
-        android:layout_width="wrap_content"
+        android:id="@+id/textViewCardContent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Session Name"
-        android:textSize="18sp" />
+        android:layout_weight="1"
+        android:text="Card Content"
+        android:textSize="16sp"/>
 </LinearLayout>

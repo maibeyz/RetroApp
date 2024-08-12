@@ -1,61 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.viewmodel.SessionSettingsActivity">
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    <EditText
+        android:id="@+id/editTextSessionName"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="119dp"
+        android:layout_marginTop="240dp"
+        android:layout_marginEnd="119dp"
+        android:ems="10"
+        android:hint="Session Name"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.275"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".SessionSettingsActivity">
+    <EditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="119dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="119dp"
+        android:ems="10"
+        android:hint="Session Password"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.275"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextSessionName" />
 
-        <TextView
-            android:id="@+id/textViewSessionSettings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Session Settings"
-            android:textSize="24sp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"/>
+    <Button
+        android:id="@+id/buttonStartSession"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="177dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="181dp"
+        android:text="Start Session"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.441"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTimer" />
 
-        <EditText
-            android:id="@+id/editTextSessionName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Session Name"
-            android:layout_below="@id/textViewSessionSettings"
-            android:layout_marginTop="20dp"/>
+    <TextView
+        android:id="@+id/textViewSessionSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="131dp"
+        android:layout_marginEnd="131dp"
+        android:layout_marginBottom="92dp"
+        android:text="Session Settings"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextSessionName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <EditText
-            android:id="@+id/editTextPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Password"
-            android:layout_below="@id/editTextSessionName"
-            android:layout_marginTop="20dp"/>
+    <EditText
+        android:id="@+id/editTextTimer"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="119dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="119dp"
+        android:hint="SetTimer (In Minutes)"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.275"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
 
-        <TextView
-            android:id="@+id/textViewTimer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Set Timer (in minutes)"
-            android:layout_below="@id/editTextPassword"
-            android:layout_marginTop="20dp"/>
 
-        <EditText
-            android:id="@+id/editTextTimer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Timer"
-            android:layout_below="@id/textViewTimer"
-            android:layout_marginTop="10dp"/>
-
-        <Button
-            android:id="@+id/buttonStartSession"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Start Session"
-            android:layout_below="@id/editTextTimer"
-            android:layout_marginTop="20dp"
-            android:layout_centerHorizontal="true"/>
-    </RelativeLayout>
-</layout>
+</androidx.constraintlayout.widget.ConstraintLayout>
