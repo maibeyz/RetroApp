@@ -1,4 +1,4 @@
-package com.mai.retroapp
+package com.mai.retroapp.ui.viewmodel
 
 import android.app.Application
 import com.google.firebase.crashlytics.FirebaseCrashlytics
