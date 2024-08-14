@@ -15,9 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RetroApp"
         tools:targetApi="31">
-        <activity
-            android:name=".ui.viewmodel.MainActivity2"
-            android:exported="false" />
+
         <activity
             android:name=".ui.viewmodel.JoinAnonymus"
             android:exported="false" />

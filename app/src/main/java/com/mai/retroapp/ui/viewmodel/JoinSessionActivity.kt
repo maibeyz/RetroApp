@@ -2,6 +2,7 @@ package com.mai.retroapp.ui.viewmodel
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -18,6 +19,7 @@ class JoinSessionActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityJoinSessionBinding
     private lateinit var database: DatabaseReference
+    private lateinit var username: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +30,8 @@ class JoinSessionActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         database = FirebaseDatabase.getInstance().reference
+        username = intent.getStringExtra("USERNAME") ?: ""
+
 
         binding.buttonJoin.setOnClickListener {
             val sessionName = binding.editTextJoinSessionName.text.toString()
@@ -42,45 +46,52 @@ class JoinSessionActivity : AppCompatActivity() {
                 }
                 return@setOnClickListener
            }
+            joinSession(sessionName, sessionPassword)
 
-            val sessionRef = database.child("sessions").child(sessionName)
-            sessionRef.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.exists()) {
-                        val storedPassword = snapshot.child("password").getValue(String::class.java)
+        }
+    }
+    private fun joinSession(sessionName: String, sessionPassword: String) {
+        val sessionsRef = database.child("sessions")
+
+        sessionsRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var sessionFound = false
+
+
+                for (sessionSnapshot in snapshot.children) {
+                    val storedName = sessionSnapshot.child("name").getValue(String::class.java)
+                    val storedPassword = sessionSnapshot.child("password").getValue(String::class.java)
+
+                    Log.d("JoinSessionActivity", "Stored Name: $storedName, Stored Password: $storedPassword")
+
+                    if (storedName != null && storedPassword != null && storedName == sessionName) {
+                        sessionFound = true
+
                         if (storedPassword == sessionPassword) {
-                            val intent = Intent(this@JoinSessionActivity, MainActivity::class.java).apply {
+                            Log.d("JoinSessionActivity", "Password matches, starting session")
+                            val intent = Intent(this@JoinSessionActivity, SessionActivity::class.java).apply {
                                 putExtra("SESSION_NAME", sessionName)
                                 putExtra("SESSION_PASSWORD", sessionPassword)
+                                putExtra("USERNAME", username)
                             }
                             startActivity(intent)
+                            break
                         } else {
                             binding.editTextJoinSessionPassword.error = "Incorrect password"
+                            break
                         }
-                    } else {
-                        binding.editTextJoinSessionName.error = "Session does not exist"
                     }
                 }
 
-                override fun onCancelled(error: DatabaseError) {
-                    // Handle error
+                if (!sessionFound) {
+                    binding.editTextJoinSessionName.error = "Session does not exist"
                 }
-            })
-        }
-        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { view, insets ->
-            val imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
-            view.setPadding(0, 0, 0, imeInsets.bottom)
-            insets
-        }
-        binding.buttonJoin.setOnClickListener {
-            val sessionName = binding.editTextSessionName.text.toString()
-            if (sessionName.isNotEmpty()) {
-                val intent = Intent(this, SessionActivity::class.java).apply {
-                    putExtra("SESSION_NAME", sessionName)
-                }
-                startActivity(intent)
             }
-        }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("JoinSessionActivity", "Database error: ${error.message}")
+            }
+        })
     }
 }
 
