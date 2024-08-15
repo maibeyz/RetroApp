@@ -14,7 +14,7 @@ class SessionAdapter(private val sessions: List<Session>) : RecyclerView.Adapter
         private val sessionName: TextView = itemView.findViewById(R.id.textViewSessionName)
 
         fun bind(session: Session) {
-            sessionName.text = session.name // Session ismini göster
+            sessionName.text = session.name
         }
     }
 

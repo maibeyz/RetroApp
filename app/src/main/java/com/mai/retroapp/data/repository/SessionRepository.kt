@@ -26,6 +26,7 @@ class SessionRepository {
                 for (sessionSnapshot in snapshot.children) {
                     val session = sessionSnapshot.getValue(Session::class.java)
                     if (session != null) {
+                        session.cards.values.toList()
                         sessionList.add(session)
                     }
                 }
@@ -55,12 +56,13 @@ class SessionRepository {
 
 
     fun addCardToSession(sessionName: String, card: Card) {
-        database.child("sessions").child(sessionName).child("cards").child(card.id).setValue(card)
+        val sessionRef = database.child(sessionName).child("cards").child(card.id)
+        sessionRef.setValue(card)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-
+                    Log.d("SessionRepository", "Card added successfully to session: $sessionName")
                 } else {
-
+                    Log.e("SessionRepository", "Error adding card to session", task.exception)
                 }
             }
     }
@@ -69,20 +71,20 @@ class SessionRepository {
     fun getSessionCards(sessionName: String): LiveData<List<Card>> {
         val cardsLiveData = MutableLiveData<List<Card>>()
 
-        database.child("sessions").child(sessionName).child("cards")
+        database.child(sessionName).child("cards")
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val cards = mutableListOf<Card>()
-                    for (cardSnapshot in snapshot.children) {
-                        val card = cardSnapshot.getValue(Card::class.java)
-                        card?.let { cards.add(it) }
+                     if (snapshot.exists()) {
+                        for (cardSnapshot in snapshot.children) {
+                            val card = cardSnapshot.getValue(Card::class.java)
+                            card?.let { cards.add(it) }
+                        }
                     }
                     cardsLiveData.postValue(cards)
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-
-                    Log.e("SessionRepository", "Error fetching cards: ${error.message}")
                 }
             })
 

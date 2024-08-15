@@ -2,6 +2,7 @@ package com.mai.retroapp.ui.viewmodel
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -32,6 +33,9 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
+
+
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -56,7 +60,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val database = FirebaseDatabase.getInstance().reference.child("sessions")
+
 
     }
 
@@ -67,10 +71,10 @@ class MainActivity : AppCompatActivity() {
                 for (sessionSnapshot in snapshot.children) {
                     val session = sessionSnapshot.getValue(Session::class.java)
                     if (session != null) {
-                        sessionList.add(session) // Listeye ekle
+                        sessionList.add(session)
                     }
                 }
-                sessionAdapter.notifyDataSetChanged() // Adapterı güncelle
+                sessionAdapter.notifyDataSetChanged()
             }
 
             override fun onCancelled(error: DatabaseError) {

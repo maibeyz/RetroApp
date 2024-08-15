@@ -27,18 +27,24 @@ class SessionSettingsActivity : AppCompatActivity() {
         setContentView(binding.root)
         database = FirebaseDatabase.getInstance().reference
 
+
+
         binding.buttonStartSession.setOnClickListener {
             val sessionName = binding.editTextSessionName.text.toString()
             val sessionPassword = binding.editTextPassword.text.toString()
+            val showUsername = binding.checkBoxShowUsername.isChecked
+
             if (sessionName.isNotEmpty() && sessionPassword.isNotEmpty()) {
-                createSession(sessionName, sessionPassword)
+                createSession(sessionName, sessionPassword, showUsername)
             } else {
                 Toast.makeText(this, "Lütfen tüm alanları doldurun", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    private fun createSession(sessionName: String, sessionPassword: String) {
+    private fun createSession(sessionName: String, sessionPassword: String, showUsername: Boolean) {
+        val username = binding.editTextUsername.text.toString()
+        val sessionDuration = binding.editTextTimer.text.toString().toLongOrNull() ?: 0
         val session = Session(name = sessionName, password = sessionPassword)
         val sessionId = database.child("sessions").push().key ?: return
 
@@ -46,6 +52,11 @@ class SessionSettingsActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 val intent = Intent(this, SessionActivity::class.java).apply {
                     putExtra("SESSION_NAME", sessionName)
+                    putExtra("SHOW_USERNAME", showUsername)
+                    putExtra("USERNAME", username)
+                    putExtra("SESSION_DURATION", sessionDuration)
+
+
                 }
                 startActivity(intent)
             }.addOnFailureListener {
