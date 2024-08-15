@@ -3,13 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F4F3F0"
     tools:context=".ui.viewmodel.SessionActivity">
 
     <TextView
-        android:layout_marginTop="40dp"
         android:id="@+id/textViewSessionTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:text="Session Name "
         android:textAlignment="center"
         android:textSize="25sp" />
@@ -75,17 +76,19 @@
         android:id="@+id/buttonAddCard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Card"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_margin="16dp"/>
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:backgroundTint="#D1DFBB"
+        android:text="Add Card" />
+
     <TextView
         android:id="@+id/textViewTimer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Kalan Süre: "
-        android:textSize="18sp"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="16dp"
-        android:layout_gravity="center_horizontal"/>
+        android:text="Kalan Süre: "
+        android:textSize="18sp" />
 
 </RelativeLayout>

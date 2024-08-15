@@ -5,15 +5,15 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F4F3F0"
+    android:backgroundTint="#F4F3F0"
     tools:context=".ui.viewmodel.SessionSettingsActivity">
 
     <EditText
         android:id="@+id/editTextSessionName"
-        android:layout_width="250dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="119dp"
         android:layout_marginTop="240dp"
-        android:layout_marginEnd="119dp"
         android:ems="10"
         android:hint="Session Name"
         android:inputType="text"
@@ -24,11 +24,9 @@
 
     <EditText
         android:id="@+id/editTextPassword"
-        android:layout_width="250dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="119dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="119dp"
+        android:layout_marginTop="30dp"
         android:ems="10"
         android:hint="Session Password"
         android:inputType="textPassword"
@@ -39,26 +37,25 @@
 
     <Button
         android:id="@+id/buttonStartSession"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="177dp"
-        android:layout_marginTop="46dp"
-        android:layout_marginEnd="181dp"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="#D1DFBB"
         android:text="Start Session"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.441"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBoxShowUsername" />
 
     <TextView
         android:id="@+id/textViewSessionSettings"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="131dp"
-        android:layout_marginEnd="131dp"
         android:layout_marginBottom="92dp"
+        android:fontFamily="@font/alex_brush"
         android:text="Session Settings"
-        android:textSize="25sp"
+        android:textAlignment="center"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/editTextSessionName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -66,11 +63,9 @@
 
     <EditText
         android:id="@+id/editTextTimer"
-        android:layout_width="250dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="119dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="119dp"
+        android:layout_marginTop="30dp"
         android:hint="SetTimer (In Minutes)"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.275"
@@ -80,23 +75,23 @@
 
     <CheckBox
         android:id="@+id/checkBoxShowUsername"
-        android:layout_width="200dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="141dp"
+        android:layout_marginTop="30dp"
         android:text="Kullanıcı adını göster"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTimer" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextUsername" />
 
     <EditText
         android:id="@+id/editTextUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="106dp"
+        android:layout_marginTop="30dp"
         android:hint="Kullanıcı Adı"
-        app:layout_constraintTop_toBottomOf="@+id/buttonStartSession"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTimer"
         tools:layout_editor_absoluteX="0dp" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

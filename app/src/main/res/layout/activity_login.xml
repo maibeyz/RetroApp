@@ -4,37 +4,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F4F3F0"
     tools:context=".ui.viewmodel.LoginActivity">
 
     <TextView
         android:id="@+id/textViewLoginTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Join Session"
-        android:textSize="24sp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"/>
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/alex_brush"
+        android:text="Join Session"
+        android:textAlignment="center"
+        android:textSize="24sp" />
 
     <Button
         android:id="@+id/buttonGoogleSignIn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sign in with Google"
         android:layout_below="@id/textViewLoginTitle"
-        android:layout_marginTop="20dp"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"/>
+        android:layout_marginTop="107dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="#D1DFBB"
+        android:text="Sign in with Google" />
 
     <Button
         android:id="@+id/buttonAnonymousSignIn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sign in Anonymously"
         android:layout_below="@id/buttonGoogleSignIn"
-        android:layout_marginTop="20dp"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"/>
-
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="#D1DFBB"
+        android:text="Sign in Anonymously" />
 
 
 </RelativeLayout>
