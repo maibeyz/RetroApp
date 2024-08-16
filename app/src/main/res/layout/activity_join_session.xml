@@ -13,18 +13,19 @@
         android:id="@+id/textViewJoinSessionTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="170dp"
         android:fontFamily="@font/alex_brush"
         android:text="Join Session"
         android:textAlignment="center"
         android:textSize="24sp"
-        tools:layout_editor_absoluteX="193dp"
-        tools:layout_editor_absoluteY="69dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
 
     <EditText
         android:id="@+id/editTextJoinSessionName"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginTop="107dp"
+        android:layout_marginTop="100dp"
         android:ems="10"
         android:hint="Session Name"
         android:inputType="text"

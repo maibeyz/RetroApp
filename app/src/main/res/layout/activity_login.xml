@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F4F3F0"
@@ -11,34 +13,33 @@
         android:id="@+id/textViewLoginTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="170dp"
         android:fontFamily="@font/alex_brush"
         android:text="Join Session"
         android:textAlignment="center"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="16dp" />
 
     <Button
         android:id="@+id/buttonGoogleSignIn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textViewLoginTitle"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="107dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="100dp"
         android:backgroundTint="#D1DFBB"
-        android:text="Sign in with Google" />
+        android:text="Sign in with Google"
+        app:layout_constraintTop_toBottomOf="@+id/textViewLoginTitle"
+        tools:layout_editor_absoluteX="0dp" />
 
     <Button
         android:id="@+id/buttonAnonymousSignIn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/buttonGoogleSignIn"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="30dp"
-        android:layout_marginEnd="16dp"
         android:backgroundTint="#D1DFBB"
-        android:text="Sign in Anonymously" />
+        android:text="Sign in Anonymously"
+        app:layout_constraintTop_toBottomOf="@+id/buttonGoogleSignIn"
+        tools:layout_editor_absoluteX="0dp" />
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
