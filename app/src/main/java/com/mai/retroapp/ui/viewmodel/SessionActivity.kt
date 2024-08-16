@@ -18,6 +18,7 @@ import com.mai.retroapp.R
 import com.mai.retroapp.data.model.Card
 import com.mai.retroapp.data.repository.SessionRepository
 import com.mai.retroapp.databinding.ActivitySessionBinding
+import com.mai.retroapp.ui.util.GlobalCountDownTimer
 import com.mai.retroapp.ui.view.CardAdapter
 import com.mai.retroapp.ui.view.ItemTouchHelper.CardMoveCallback
 
@@ -73,25 +74,20 @@ class SessionActivity : AppCompatActivity() {
 
     private fun startTimer(duration: Long) {
         isTimerRunning = true
-        countDownTimer = object : CountDownTimer(duration, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-                remainingTime = millisUntilFinished
-                val secondsRemaining = remainingTime / 1000
-                textViewTimer.text = "Kalan Süre: $secondsRemaining saniye"
-                Log.d("SessionActivity", "Kalan süre: $secondsRemaining saniye")
-            }
-
-            override fun onFinish() {
-                isTimerRunning = false
-                textViewTimer.text = "Kalan Süre: 0 saniye"
-                Toast.makeText(
-                    this@SessionActivity,
-                    "Süre doldu, artık kart ekleyemezsiniz.",
-                    Toast.LENGTH_SHORT
-                ).show()
-                binding.buttonAddCard.isEnabled = false
-            }
-        }.start()
+        GlobalCountDownTimer.startTimer(duration)
+        GlobalCountDownTimer.onTickListener = { millisUntilFinished ->
+            val secondsRemaining = millisUntilFinished / 1000
+            textViewTimer.text = "Kalan Süre: $secondsRemaining saniye"
+        }
+        GlobalCountDownTimer.onFinishListener = {
+            isTimerRunning = false
+            textViewTimer.text = "Kalan Süre: 0 saniye"
+            Toast.makeText(
+                this@SessionActivity,
+                "Süre doldu, artık kart ekleyemezsiniz.",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
 
